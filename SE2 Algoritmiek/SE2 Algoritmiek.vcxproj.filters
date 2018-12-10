@@ -21,12 +21,21 @@
     <ClInclude Include="..\search.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\ttt.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Homework1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\search.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ttt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ttt_mc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

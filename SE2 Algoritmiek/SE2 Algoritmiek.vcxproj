@@ -152,11 +152,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\search.h" />
+    <ClInclude Include="..\ttt.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Homework1.cpp" />
     <ClCompile Include="..\search.cpp" />
+    <ClCompile Include="..\ttt.cpp" />
+    <ClCompile Include="..\ttt_mc.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
