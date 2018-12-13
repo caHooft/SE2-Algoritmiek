@@ -151,15 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Downloads\8puzzle.h" />
     <ClInclude Include="..\search.h" />
     <ClInclude Include="..\ttt.h" />
+    <ClInclude Include="Homework3.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\Downloads\8puzzle.cpp" />
     <ClCompile Include="..\Homework1.cpp" />
     <ClCompile Include="..\search.cpp" />
     <ClCompile Include="..\ttt.cpp" />
     <ClCompile Include="..\ttt_mc.cpp" />
+    <ClCompile Include="Homework3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 // ttt_mc.cpp
 // Compile with: g++ -std=c++11 -o ttt_mc ttt_mc.cpp ttt.cpp
-
+/*
 #include <iostream>
 #include <algorithm>
 #include <map>
@@ -30,6 +30,9 @@ Move getBestMove(const std::array<int, 9> &scores, const State &board)
 
 Move mcMove(const State &board, const Player &player)
 {
+	//mc trial en mc update score aanroepen
+	//get best move zijn values hieruit meegeven en aanroepen
+	//beste move krijgen en uitvoeren
 	return 2;
 }
 
@@ -79,4 +82,5 @@ int main()
 
 	return 0;
 }
+*/
 
