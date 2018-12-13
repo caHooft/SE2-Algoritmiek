@@ -1,6 +1,6 @@
 // peggame.cpp
 // Compile with: g++ peggame.cpp -o peggame
-
+/*
 #include "Homework3.h"
 
 
@@ -170,3 +170,4 @@ int main()
 
 	return 0;
 }
+*/
