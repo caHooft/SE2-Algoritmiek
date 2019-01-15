@@ -1,11 +1,10 @@
 // ttt_mc.cpp
 // Compile with: g++ -std=c++11 -o ttt_mc ttt_mc.cpp ttt.cpp
-/*
+
 #include <iostream>
 #include <algorithm>
 #include <map>
 #include "ttt.h"
-
 
 unsigned const n_trials = 1000;
 unsigned const mc_match = 1;
@@ -24,7 +23,7 @@ void mcUpdateScores(std::array<int,9> &scores, const State &board, const Player 
 }
 
 Move getBestMove(const std::array<int, 9> &scores, const State &board)
-{
+{ 
 	return 2;
 }
 
@@ -33,6 +32,9 @@ Move mcMove(const State &board, const Player &player)
 	//mc trial en mc update score aanroepen
 	//get best move zijn values hieruit meegeven en aanroepen
 	//beste move krijgen en uitvoeren
+	//getBestMove();
+	//cout << rand() % 9 << endl;
+	
 	return 2;
 }
 
@@ -82,5 +84,3 @@ int main()
 
 	return 0;
 }
-*/
-

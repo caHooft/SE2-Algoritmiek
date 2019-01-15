@@ -11,6 +11,7 @@
 #include <stack>
 #include <set>
 
+/*
 using Move = std::tuple<int, int, int, int>;
 using State = std::array<bool, 15>;
 
@@ -33,5 +34,5 @@ std::ostream &operator<<(std::ostream &os, const Vertex &state);
 Vertex doMove(const Vertex &v, const Move &m);
 Path dfs(const Graph &graph, const Vertex &start, std::function<bool(const Vertex &vertex)> goalTest);
 Path bfs(const Graph &graph, const Vertex &start, std::function<bool(const Vertex &vertex)> goalTest);
-
+*/
 #endif 
