@@ -1,5 +1,5 @@
 // ttt.h
-/*
+
 #ifndef TTT_H
 #define TTT_H
 
@@ -41,4 +41,3 @@ Player getWinner(const State &state);
 std::vector<Move> getMoves(const State &state);
 
 #endif // TTT_H
-*/

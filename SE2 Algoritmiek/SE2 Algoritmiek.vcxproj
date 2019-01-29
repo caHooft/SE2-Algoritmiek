@@ -160,6 +160,7 @@
     <ClCompile Include="..\Homework1.cpp" />
     <ClCompile Include="..\search.cpp" />
     <ClCompile Include="..\ttt.cpp" />
+    <ClCompile Include="..\ttt_ab.cpp" />
     <ClCompile Include="..\ttt_mc.cpp" />
     <ClCompile Include="Homework3.cpp" />
   </ItemGroup>
