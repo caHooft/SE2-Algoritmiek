@@ -11,7 +11,7 @@
 #include <set>
 #include <map>
 #include <deque>
-/*
+
 using Vertex = char;
 using Path = std::vector<Vertex>;
 
@@ -28,5 +28,5 @@ private:
 
 Path dfs(const Graph &graph, const Vertex &start, std::function<bool(const Vertex &vertex)> goalTest);
 Path bfs(const Graph &graph, const Vertex &start, std::function<bool(const Vertex &vertex)> goalTest);
-*/
+
 #endif // SEARCH_H

@@ -1,10 +1,8 @@
 // search.cpp
 // Compile with: g++ search.cpp -o search
-/*
 #include "search.h"
-
 using namespace std;
-
+/*
 typename std::vector<Vertex>::const_iterator Graph::cbegin(Vertex v) const
 {
 	currentVertex = v;
@@ -16,8 +14,7 @@ typename std::vector<Vertex>::const_iterator Graph::cend() const
 	return adjacents[currentVertex].cend();
 }
 
-Graph::GraphMap Graph::adjacents =
-{
+Graph::GraphMap Graph::adjacents = {
 		{ 'S', { 'A', 'B' } },
 		{ 'A', { 'B', 'D', 'S' } },
 		{ 'B', { 'S', 'A', 'C' } },
@@ -29,14 +26,14 @@ Graph::GraphMap Graph::adjacents =
 
 Path dfs(const Graph &graph, const Vertex &start, std::function<bool(const Vertex &vertex)> goalTest)
 {
-	std::stack<Path> q;
+	std::stack<Path> queue;
 	std::set<Vertex> visited;
 	Path path;
 
-	q.push(path);
-	while (!q.empty()) {
-		path = q.top();
-		q.pop();
+	queue.push(path);
+	while (!queue.empty()) {
+		path = queue.top();
+		queue.pop();
 
 		Vertex last;
 		if (path.size() == 0) {
@@ -53,7 +50,7 @@ Path dfs(const Graph &graph, const Vertex &start, std::function<bool(const Verte
 			for (auto it = graph.cbegin(last); it != graph.cend(); it++) { // extend path with new Vertex
 				Path n = path;
 				n.push_back(*it);
-				q.push(n);
+				queue.push(n);
 			}
 		}
 	}
@@ -62,43 +59,44 @@ Path dfs(const Graph &graph, const Vertex &start, std::function<bool(const Verte
 
 Path bfs(const Graph &graph, const Vertex &start, std::function<bool(const Vertex &vertex)> goalTest)
 {
-	std::deque<Path> q;
+	std::deque<Path> queue;
 	std::set<Vertex> visited;
 	Path path;
-	
-	q.push_back(path);
-	while (!q.empty())
+
+	queue.push_back(path);
+
+	while (!queue.empty())
 	{
-		path = q.front();
-		q.pop_front();
+		path = queue.front();
+		queue.pop_front();
 
 		Vertex last;
+
 		if (path.size() == 0)
 		{
 			last = start;
 		}
+
 		else
 		{
 			last = path.back();
 		}
-		if (goalTest(last))
-		{
-			return path; // path is a vector of Vertices
-		}	
 
-			for (auto it = graph.cbegin(last); it != graph.cend(); it++)
+		if (goalTest(last))
+			return path;
+
+		for (auto it = graph.cbegin(last); it != graph.cend(); it++)
+		{ // extend path with new Vertex
+			Path n = path;
+			if (visited.find(*it) == visited.end())
 			{
-				Path n = path;
-				if (visited.find(*it) == visited.end())
-				{
-					n.push_back(*it);
-					q.push_back(n);
-				}				
+				n.push_back(*it);
+				queue.push_back(n);
+				visited.insert(*it);
 			}
-			visited.insert(last);
-		
+		}
 	}
-	return Path(); // return empty path
+	return Path();
 }
 
 int main()

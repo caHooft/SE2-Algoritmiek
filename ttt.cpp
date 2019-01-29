@@ -1,5 +1,5 @@
 // ttt.cpp
-
+/*
 #include "ttt.h"
 
 std::ostream &operator<<(std::ostream &os, const Player &player)
@@ -97,3 +97,4 @@ std::vector<Move> getMoves(const State &state)
     }
     return moves;
 }
+*/
