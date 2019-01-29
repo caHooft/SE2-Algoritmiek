@@ -1,30 +1,30 @@
 // ttt.cpp
 #include "ttt.h"
 
-std::ostream &operator<<(std::ostream &os, const Player &player)
+ostream &operator<<(ostream &os, const Player &player)
 {
     switch(player)
     {
         case Player::X: os << "X"; break;
         case Player::O: os << "O"; break;
         case Player::None: os << " "; break;
-        default: os.setstate(std::ios_base::failbit);
+        default: os.setstate(ios_base::failbit);
     }
     return os;
 }
 
-std::ostream &operator<<(std::ostream &os, const State &state) 
+ostream &operator<<(ostream &os, const State &state) 
 {
     for (int r=0; r<3; r++) 
 	{
-        os << "+-+-+-+" << std::endl;
+        os << "+-+-+-+" << endl;
         for (int c=0; c<3; c++) 
 		{
             os << "|" << state[r*3+c];
         }
-        os << "|" << std::endl;
+        os << "|" << endl;
     }
-    os << "+-+-+-+" << std::endl;
+    os << "+-+-+-+" << endl;
     return os;
 }
 
@@ -81,9 +81,9 @@ Player getWinner(const State &state)
     return Player::None;
 }
 
-std::vector<Move> getMoves(const State &state)
+vector<Move> getMoves(const State &state)
 {
-    std::vector<Move> moves;
+    vector<Move> moves;
     if (getWinner(state) == Player::None) 
 	{
         for (int i=0; i<9; i++) 

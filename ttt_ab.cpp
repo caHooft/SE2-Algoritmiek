@@ -9,51 +9,160 @@
 
 enum class PlayerType { Human, Computer };
 
-int eval(const State &board, const Player &player)
+int getMonteCarloEval(const State &board, Player player, int trials)
 {
+	vector<Move> moves = getMoves(board);
+
+	int score = 0;
+
+	for (int i = 0; i < trials; ++i)
+	{
+		State mcBoard = board;
+
+		if (getWinner(mcBoard) == Player::X)
+		{
+			if (board[i] == Player::X)
+			{
+				score++;
+			}
+
+			if (board[i] == Player::O)
+			{
+				score--;
+			}
+		}
+
+		if (getWinner(mcBoard) == Player::O)
+		{
+			if (board[i] == Player::X)
+			{
+				score--;
+			}
+
+			if (board[i] == Player::O)
+			{
+				score++;
+			}
+		}
+	}
+
+	return score;
 }
 
-Move alphaBeta(const State &board, int ply)
+int eval(const State &board, const Player &player)
 {
+	vector<Move> moves = getMoves(board);
+
+	int wins = 0;
+
+	for (int i = 0; i < 9; ++i)
+	{
+		State mcBoard = board;
+
+		random_shuffle(moves.begin(), moves.end());
+		 
+		for (const Move &m : moves)
+		{
+			mcBoard = doMove(mcBoard, m);
+		}			
+		
+		if (getWinner(mcBoard) == player)
+		{
+			wins ++;
+		}	
+			
+	}
+
+	return wins - 200 / 2;
 }
+
+MoveEval alphaBeta(State &board, int ply, Player player, Player opponent, int alpha, int beta)
+{
+	if (ply == 0)
+	{
+		return make_pair(Move(), getMonteCarloEval(board, player,9));
+	}		
+
+	vector<Move> moves = getMoves(board);
+	if (moves.size() == 0)
+	{
+		return make_pair(Move(), getMonteCarloEval(board, player,9));
+	}		
+
+	MoveEval best = make_pair(Move(), alpha);
+	for (Move &move : moves)
+	{
+		doMove(board, move);
+		MoveEval me = alphaBeta(board, ply - 1, opponent, player, -beta, -alpha);
+
+		if (-me.second > alpha)
+		{
+			alpha = -me.second;
+			best = make_pair(move, alpha);
+		}
+		if (alpha >= beta)
+			return best;
+	}
+	return best;
+}
+
+Move alphaBeta(const State &b, int ply)
+{
+	State board(b);
+	Player player = getCurrentPlayer(board);
+	Player opponent = Player::None;
+
+	if (player == Player::X)
+	{
+		opponent = Player::O;
+	}
+
+	else
+	{
+		opponent = Player::X;
+	}
+	
+	return alphaBeta(board, ply, player, opponent, numeric_limits<int>::min() + 1, numeric_limits<int>::max()).first;
+}
+
 
 int main()
 {
-	std::srand(std::time(0));
+	srand(time(0));
 
-	std::map<Player,PlayerType> playerType;
+	map<Player, PlayerType> playerType;
 	playerType[Player::X] = PlayerType::Human;
 	playerType[Player::O] = PlayerType::Computer;
 
-        State board = { 
-            Player::None, Player::None, Player::None, 
-            Player::None, Player::None, Player::None, 
-            Player::None, Player::None, Player::None };
-	std::cout << board << std::endl;
+	State board = {
+		Player::None, Player::None, Player::None,
+		Player::None, Player::None, Player::None,
+		Player::None, Player::None, Player::None };
+	cout << board << endl;
 
-	std::vector<Move> moves = getMoves(board);
+	vector<Move> moves = getMoves(board);
 	while (moves.size() > 0) {
 		if (playerType[getCurrentPlayer(board)] == PlayerType::Human) {
-			std::cout << "+-+-+-+" << std::endl << 
-				     "|0|1|2|" << std::endl <<
-				     "+-+-+-+" << std::endl <<
-				     "|3|4|5|" << std::endl <<
-				     "+-+-+-+" << std::endl <<
-				     "|6|7|8|" << std::endl <<
-				     "+-+-+-+" << std::endl << std::endl;
-			std::cout << "Enter a move ( ";
-			for (Move m: moves) std::cout << m << " ";
-			std::cout << "): ";
+			cout << "+-+-+-+" << endl <<
+				"|0|1|2|" << endl <<
+				"+-+-+-+" << endl <<
+				"|3|4|5|" << endl <<
+				"+-+-+-+" << endl <<
+				"|6|7|8|" << endl <<
+				"+-+-+-+" << endl << endl;
+			cout << "Enter a move ( ";
+			for (Move m : moves) cout << m << " ";
+			cout << "): ";
 			Move m;
-			std::cin >> m;
+			cin >> m;
 			board = doMove(board, m);
-		} else {
-			board = doMove(board, alphaBeta(board, 5));
 		}
-		std::cout << board << std::endl;
+		else {
+			board = doMove(board, alphaBeta(board, 9));
+		}
+		cout << board << endl;
 		moves = getMoves(board);
 	}
 
 	return 0;
 }
-
