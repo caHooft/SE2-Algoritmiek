@@ -15,9 +15,11 @@ int getMonteCarloEval(const State &board, Player player, int trials)
 
 	int score = 0;
 
+	State mcBoard = board;
+
 	for (int i = 0; i < trials; ++i)
 	{
-		State mcBoard = board;
+		random_shuffle(moves.begin(), moves.end());
 
 		if (getWinner(mcBoard) == Player::X)
 		{
@@ -55,10 +57,10 @@ int eval(const State &board, const Player &player)
 
 	int wins = 0;
 
+	State mcBoard = board;
+
 	for (int i = 0; i < 9; ++i)
 	{
-		State mcBoard = board;
-
 		random_shuffle(moves.begin(), moves.end());
 		 
 		for (const Move &m : moves)
@@ -70,7 +72,7 @@ int eval(const State &board, const Player &player)
 		{
 			wins ++;
 		}	
-			
+
 	}
 
 	return wins - 200 / 2;
@@ -84,12 +86,14 @@ MoveEval alphaBeta(State &board, int ply, Player player, Player opponent, int al
 	}		
 
 	vector<Move> moves = getMoves(board);
+
 	if (moves.size() == 0)
 	{
 		return make_pair(Move(), getMonteCarloEval(board, player,9));
 	}		
 
 	MoveEval best = make_pair(Move(), alpha);
+
 	for (Move &move : moves)
 	{
 		doMove(board, move);
@@ -100,9 +104,14 @@ MoveEval alphaBeta(State &board, int ply, Player player, Player opponent, int al
 			alpha = -me.second;
 			best = make_pair(move, alpha);
 		}
+
 		if (alpha >= beta)
+		{
 			return best;
+		}
+			
 	}
+
 	return best;
 }
 
@@ -134,15 +143,19 @@ int main()
 	playerType[Player::X] = PlayerType::Human;
 	playerType[Player::O] = PlayerType::Computer;
 
-	State board = {
+	State board = 
+	{
 		Player::None, Player::None, Player::None,
 		Player::None, Player::None, Player::None,
-		Player::None, Player::None, Player::None };
+		Player::None, Player::None, Player::None 
+	};
 	cout << board << endl;
 
 	vector<Move> moves = getMoves(board);
-	while (moves.size() > 0) {
-		if (playerType[getCurrentPlayer(board)] == PlayerType::Human) {
+	while (moves.size() > 0) 
+	{
+		if (playerType[getCurrentPlayer(board)] == PlayerType::Human) 
+		{
 			cout << "+-+-+-+" << endl <<
 				"|0|1|2|" << endl <<
 				"+-+-+-+" << endl <<
@@ -157,8 +170,10 @@ int main()
 			cin >> m;
 			board = doMove(board, m);
 		}
-		else {
-			board = doMove(board, alphaBeta(board, 9));
+
+		else 
+		{
+			board = doMove(board, alphaBeta(board, 5));
 		}
 		cout << board << endl;
 		moves = getMoves(board);
