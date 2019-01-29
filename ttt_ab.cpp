@@ -21,16 +21,18 @@ int getMonteCarloEval(const State &board, Player player, int trials)
 	{
 		random_shuffle(moves.begin(), moves.end());
 
+
+
 		if (getWinner(mcBoard) == Player::X)
 		{
 			if (board[i] == Player::X)
 			{
-				score++;
+				score+2000;
 			}
 
 			if (board[i] == Player::O)
 			{
-				score--;
+				score-2000;
 			}
 		}
 
@@ -38,12 +40,12 @@ int getMonteCarloEval(const State &board, Player player, int trials)
 		{
 			if (board[i] == Player::X)
 			{
-				score--;
+				score-2000;
 			}
 
 			if (board[i] == Player::O)
 			{
-				score++;
+				score+2000;
 			}
 		}
 	}
