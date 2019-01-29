@@ -1,10 +1,6 @@
 // ttt_ab.cpp
 // Compile with: g++ -std=c++11 -o ttt_ab ttt_ab.cpp ttt.cpp
 
-#include <iostream>
-#include <algorithm>
-#include <map>
-#include <limits>
 #include "ttt.h"
 
 enum class PlayerType { Human, Computer };
@@ -20,9 +16,7 @@ int getMonteCarloEval(const State &board, Player player, int trials)
 	for (int i = 0; i < trials; ++i)
 	{
 		random_shuffle(moves.begin(), moves.end());
-
-
-
+			   
 		if (getWinner(mcBoard) == Player::X)
 		{
 			if (board[i] == Player::X)
@@ -50,7 +44,8 @@ int getMonteCarloEval(const State &board, Player player, int trials)
 		}
 	}
 
-	return score;
+	return score - trials / 2;
+
 }
 
 int eval(const State &board, const Player &player)

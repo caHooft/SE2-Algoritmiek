@@ -2,7 +2,9 @@
 
 #ifndef TTT_H
 #define TTT_H
-
+#include <algorithm>
+#include <map>
+#include <limits>
 #include <tuple>
 #include <array>
 #include <vector>
